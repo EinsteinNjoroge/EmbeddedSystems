@@ -1,9 +1,13 @@
 import machine
 import utime
 
+
+print('Starting up the ultrasonic distance sensor Module')
+
 # Define GPIO pins
 trig_pin = machine.Pin(26, machine.Pin.OUT)  # GPIO pin for TRIG
 echo_pin = machine.Pin(27, machine.Pin.IN)  # GPIO pin for ECHO
+
 
 # Function to measure distance
 def measure_distance():
@@ -32,8 +36,10 @@ def measure_distance():
 
     return distance_cm
 
-# Main loop
-while True:
-    distance = measure_distance()
-    print("Distance:", distance, "cm")
-    utime.sleep(1)  # Sleep for 1 second before the next measurement
+#
+# # Main loop
+# while True:
+#     distance = measure_distance()
+#     print("Distance:", distance, "cm")
+#     utime.sleep(1)  # Sleep for 1 second before the next measurement
+
