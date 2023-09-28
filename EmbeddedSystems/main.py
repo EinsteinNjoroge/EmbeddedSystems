@@ -1,7 +1,8 @@
 # This is a sample Python script.
-
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+from passive_infrared_sensor import detect_motion
+from distance import measure_distance
+from machine import Pin
+import time
 
 
 def print_hi(name):
@@ -9,8 +10,16 @@ def print_hi(name):
     print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+while True:
+    distance = measure_distance()
+    motion_detected = detect_motion()
+    print("motion detected ==> ", motion_detected)
+    output = Pin(17, Pin.OUT)
+    if distance <= 100 & motion_detected:
+        print("Distance:", distance, "cm")
+        sleep_time = distance / 100
+        output.on()
+        time.sleep(sleep_time)
+        output.off()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    time.sleep(0.1)
